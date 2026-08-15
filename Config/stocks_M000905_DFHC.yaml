@@ -1,0 +1,60 @@
+train:
+  loss: ""
+
+net:
+  seq_ori_len: 24
+  feature_ori_nums: 12
+  batch_size: 64
+  diff_timesteps: 500
+  n_layer_enc: 2
+  n_layer_dec: 2
+  d_model: 64  # 4 X 16
+  timesteps: 500
+  sampling_timesteps: 500
+  beta_schedule: 'cosine'
+  n_heads: 4
+  mlp_hidden_times: 4
+  attn_pd: 0.0
+  resid_pd: 0.0
+  base_lr: 1.0e-5
+  log_interval: 10
+  save_interval: 5000
+  lr_anneal_steps: 10000
+  save_dir: './OUTPUT/stock_24/'
+  decay: 0.995
+  update_interval: 10
+  scheduler:
+    factor: 0.5
+    patience: 2000
+    min_lr: 1.0e-5
+    threshold: 1.0e-1
+    threshold_mode: rel
+    warmup_lr: 8.0e-4
+    warmup: 500
+    verbose: False
+
+aug:
+  aug_times: 4
+  kernel_size: 3
+
+
+
+
+train_dataload:
+  data_root: ./Data/datasets/M000905_Stock.csv
+  volumepos: 4
+  name: M000905
+  window: 24  # seq_length
+  shuffle: True
+  drop_last: True
+  batch_size: 64
+
+
+test_dataload:
+  data_root: ./Data/datasets/M000905_Stock.csv
+  volumepos: 4
+  name: M000905
+  window: 24  # seq_length
+  shuffle: True
+  drop_last: True
+  batch_size: 64
